@@ -20,7 +20,7 @@ namespace NPuzzle
                                              {7,8,0}
                                     };
             Helpers help = new Helpers();
-            int md = help.ManhattanDistance(current,goal);
+            int md = help.ManhattanDistance(current);
             int hd = help.HammingDistance(current1);
             Console.WriteLine(md);
         }
