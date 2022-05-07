@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,16 +17,19 @@ namespace NPuzzle
                     if (current[i, j] != 0 && current[i, j] != i * n + j + 1)//only enter if the number isn't in order
                     {
                         //look for this element in goal to compare 
-                        for (int k = 0; k < n; k++)
-                        {
-                            for (int h = 0; h < n; h++)
-                            {
-                                if (current[i, j] == goal[k, h])
-                                {
-                                    md += Math.Abs(i - k) + Math.Abs(j - h);
-                                }
-                            }
-                        }
+                        /* for (int k = 0; k < n; k++)
+                         {
+                             for (int h = 0; h < n; h++)
+                             {
+                                 if (current[i, j] == goal[k, h])
+                                 {
+                                     md += Math.Abs(i - k) + Math.Abs(j - h);
+                                 }
+                             }
+                         }*/
+                        int x, y;
+                        x = Math.DivRem(current[i, j] - 1, n,out y);
+                        md += Math.Abs(i - x) + Math.Abs(j - y);
                     }
                 }
             }
