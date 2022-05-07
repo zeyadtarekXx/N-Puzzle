@@ -6,7 +6,7 @@ namespace NPuzzle
 {
     class Helpers
     {
-        public int ManhattanDistance(int[,] current, int[,] goal)
+        public int ManhattanDistance(int[,] current)
         {
             int n = (int)Math.Sqrt(current.Length);
             int md = 0;
