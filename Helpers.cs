@@ -44,7 +44,7 @@ namespace NPuzzle
                         hd++;
                     }
                 }
-            }
+            } 
            return hd;
         }
     }
