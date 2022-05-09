@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 class Readfromfile
     {
         public int N;
