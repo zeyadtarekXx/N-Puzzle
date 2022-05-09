@@ -1,4 +1,8 @@
- class Node
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+class Node
     {
         public Node parent;
         public int[] puzzle;
