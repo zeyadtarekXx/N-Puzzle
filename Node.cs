@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-class Node
+namespace NPuzzle
+{
+    class Node
     {
+
         public Node parent;
         public int[] puzzle;
         public List<Node> childrenOfNode = new List<Node>();
@@ -11,18 +14,44 @@ class Node
         //h 
         public int heuristic_value;
         public int expansion_order;
-        public int f , g;
+        public int f, g;
+        public int zeroIndx;
+        public String puzzleStr;
+        
 
-        public Node(int p , int[] puzzle)
+        public Node(int p, int[] puzzle)
         {
             this.puzzle = puzzle;
             this.perimeter = p;
+            puzzleToStr();
+            findZeroIndx();
         }
-       public void set_F(int g , int h)
+        public void set_F(int g, int h)
         {
             this.g = g;
             this.heuristic_value = h;
             this.f = g + h;
         }
 
+        public int findZeroIndx()
+        {
+            int size = this.perimeter * this.perimeter;
+            for (int i = 0; i < size; i++)
+            {
+                if (this.puzzle[i] == 0)
+                {
+                    this.zeroIndx = i;
+                    return zeroIndx;
+                }
+            }
+            return -1 ;
+        }
+        
+        public void puzzleToStr()
+        {
+            int size = this.perimeter * this.perimeter;
+            for (int i = 0; i < size; i++)
+                this.puzzleStr += puzzle[i] + " ";
+        }
     }
+}
