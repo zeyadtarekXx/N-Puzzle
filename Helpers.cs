@@ -36,57 +36,69 @@ namespace NPuzzle
         }
         public static Node moveRight(int indx, Node current)
         {
-            Node newPuzzle = new Node(current.perimeter, current.puzzle);
-            newPuzzle.parent = current;
+            int[] copy = new int[current.perimeter * current.perimeter];
+            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
 
-            newPuzzle.puzzle[indx + 1] = current.puzzle[indx];
-            newPuzzle.puzzle[indx] = current.puzzle[indx + 1];
+            //newPuzzle.parent = current;
 
-            newPuzzle.puzzleToStr();
-            newPuzzle.zeroIndx += 1;
+            int temp = copy[indx + 1];
+            copy[indx + 1] = copy[indx];
+            copy[indx] = temp;
+
+            Node newPuzzle = new Node(current.perimeter, copy);
+            //newPuzzle.puzzleToStr();
+            //newPuzzle.zeroIndx += 1;
 
             return newPuzzle;
         }
         public static Node moveLeft(int indx, Node current)
         {
-            Node newPuzzle = new Node(current.perimeter,current.puzzle);
-            newPuzzle.parent = current;
+         
+            int[] copy = new int[current.perimeter * current.perimeter];
+            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
 
-            newPuzzle.puzzle[indx-1] = current.puzzle[indx];
-            newPuzzle.puzzle[indx] = current.puzzle[indx - 1];
+            int temp = copy[indx - 1];
+            copy[indx - 1] = copy[indx];
+            copy[indx] = temp;
 
-            newPuzzle.puzzleToStr();
-            newPuzzle.zeroIndx -= 1;
+            Node newPuzzle = new Node(current.perimeter, copy);
+            //newPuzzle.puzzleToStr();
+            //newPuzzle.zeroIndx -= 1;
 
             return newPuzzle;
         }
         public static Node moveUp(int indx, Node current)
         {
-            Node newPuzzle = new Node(current.perimeter, current.puzzle);
-            newPuzzle.parent = current;
+            int[] copy = new int[current.perimeter * current.perimeter];
+            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
 
-            newPuzzle.puzzle[indx - current.perimeter ] = current.puzzle[indx];
-            newPuzzle.puzzle[indx] = current.puzzle[indx - current.perimeter];
+            int temp = copy[indx - current.perimeter];
+            copy[indx - current.perimeter] = copy[indx];
+            copy[indx] = temp;
 
-            newPuzzle.puzzleToStr();
-            newPuzzle.zeroIndx -= current.perimeter;
+            Node newPuzzle = new Node(current.perimeter, copy);
+            //newPuzzle.puzzleToStr();
+            //ewPuzzle.zeroIndx -= current.perimeter;
 
             return newPuzzle;
 
         }
         public static Node moveDown(int indx, Node current)
         {
-            Node newPuzzle = new Node(current.perimeter, current.puzzle);
-            newPuzzle.parent = current;
+            int[] copy = new int[current.perimeter * current.perimeter];
+            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
 
-            newPuzzle.puzzle[indx + current.perimeter] = current.puzzle[indx];
-            newPuzzle.puzzle[indx] = current.puzzle[indx + current.perimeter];
+            int temp = copy[indx + current.perimeter];
+            copy[indx + current.perimeter] = copy[indx];
+            copy[indx] = temp;
 
-            newPuzzle.puzzleToStr();
-            newPuzzle.zeroIndx += current.perimeter;
+            Node newPuzzle = new Node(current.perimeter, copy);
+            //newPuzzle.puzzleToStr();
+            //newPuzzle.zeroIndx += current.perimeter;
 
             return newPuzzle;
         }
+
         public static bool goal(int [] puzzle)
         {
             int size = puzzle.Length;
@@ -98,6 +110,13 @@ namespace NPuzzle
                 }
             }
             return true;
+        }
+        public static void copypuzzle(int[] x, int[] y, int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                x[i] = y[i];
+            }
         }
     }
 }
