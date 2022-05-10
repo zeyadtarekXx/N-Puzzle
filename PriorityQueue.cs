@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,11 +6,11 @@ namespace NPuzzle
 {
     class PriorityQueue
     {
-        public static Node[] nodes = new Node[100];
-        public static int size =  -1 ; 
+        public  Node[] nodes = new Node[100];
+        public  int size = -1;
         private int getParentIndex(int indx)
         {
-            if(indx < 0)
+            if (indx < 0)
             {
                 return -1;
             }
@@ -18,7 +18,7 @@ namespace NPuzzle
         }
         private int getLeftChildIndex(int indx)
         {
-            if(indx < 0)
+            if (indx < 0)
             {
                 return -1;
             }
@@ -68,7 +68,7 @@ namespace NPuzzle
             {
                 min = r;
             }
-            if(indx != min)
+            if (indx != min)
             {
                 swap(indx, min);
                 this.shiftElementsDown(min);
@@ -96,6 +96,8 @@ namespace NPuzzle
         {
             return nodes[0];
         }
+        
+  
 
     }
 }
