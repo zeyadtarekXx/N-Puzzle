@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NPuzzle
 {
-    class Node
+    class Node 
     {
 
         public Node parent;
@@ -26,6 +26,12 @@ namespace NPuzzle
             puzzleToStr();
             findZeroIndx();
         }
+        public Node()
+        {
+
+        }
+
+       
         public void set_F(int g, int h)
         {
             this.g = g;
@@ -49,9 +55,16 @@ namespace NPuzzle
         
         public void puzzleToStr()
         {
+            this.puzzleStr = null;
             int size = this.perimeter * this.perimeter;
-            for (int i = 0; i < size; i++)
-                this.puzzleStr += puzzle[i] + " ";
+            for (int i = 1; i <= size; i++)
+            {
+                this.puzzleStr += puzzle[i-1] + " ";
+                if (i%this.perimeter==0)
+                    this.puzzleStr += "\n";
+            }
         }
+
+   
     }
 }
