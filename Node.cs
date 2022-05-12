@@ -64,6 +64,20 @@ namespace NPuzzle
                     this.puzzleStr += "\n";
             }
         }
+        public bool comparePuzzles(int[] puzz)
+        {
+            bool same = false;
+            for (int i = 0; i < puzz.Length; i++)
+            {
+                if (this.puzzle[i] == puzz[i])
+                {
+                    same = true;
+                }
+                else
+                    return false;
+            }
+            return same;
+        }
 
    
     }
