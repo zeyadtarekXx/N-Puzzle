@@ -39,7 +39,7 @@ namespace NPuzzle
             int[] copy = new int[current.perimeter * current.perimeter];
             copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
 
-            //newPuzzle.parent = current;
+            
 
             int temp = copy[indx + 1];
             copy[indx + 1] = copy[indx];
@@ -48,7 +48,8 @@ namespace NPuzzle
             Node newPuzzle = new Node(current.perimeter, copy);
             //newPuzzle.puzzleToStr();
             //newPuzzle.zeroIndx += 1;
-
+            
+            newPuzzle.g = current.g + 1;
             return newPuzzle;
         }
         public static Node moveLeft(int indx, Node current)
@@ -64,7 +65,7 @@ namespace NPuzzle
             Node newPuzzle = new Node(current.perimeter, copy);
             //newPuzzle.puzzleToStr();
             //newPuzzle.zeroIndx -= 1;
-
+            newPuzzle.g = current.g + 1;
             return newPuzzle;
         }
         public static Node moveUp(int indx, Node current)
@@ -79,7 +80,7 @@ namespace NPuzzle
             Node newPuzzle = new Node(current.perimeter, copy);
             //newPuzzle.puzzleToStr();
             //ewPuzzle.zeroIndx -= current.perimeter;
-
+            newPuzzle.g = current.g + 1;
             return newPuzzle;
 
         }
@@ -95,7 +96,7 @@ namespace NPuzzle
             Node newPuzzle = new Node(current.perimeter, copy);
             //newPuzzle.puzzleToStr();
             //newPuzzle.zeroIndx += current.perimeter;
-
+            newPuzzle.g = current.g + 1;
             return newPuzzle;
         }
 
@@ -118,5 +119,6 @@ namespace NPuzzle
                 x[i] = y[i];
             }
         }
+ 
     }
 }
