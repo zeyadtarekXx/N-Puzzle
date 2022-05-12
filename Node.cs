@@ -36,7 +36,7 @@ namespace NPuzzle
         {
             this.g = g;
             this.heuristic_value = h;
-            this.f = g + h;
+            this.f = this.g + this.heuristic_value;
         }
 
         public int findZeroIndx()
@@ -64,6 +64,7 @@ namespace NPuzzle
                     this.puzzleStr += "\n";
             }
         }
+
         public bool comparePuzzles(int[] puzz)
         {
             bool same = false;
@@ -79,6 +80,5 @@ namespace NPuzzle
             return same;
         }
 
-   
     }
 }
