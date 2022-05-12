@@ -39,10 +39,13 @@ namespace NPuzzle
             //queue.HeapInsert(node2);
 
 
-            AStar a = new AStar();
-            Readfromfile test = new Readfromfile("8 Puzzle (3).txt");
+            Readfromfile test = new Readfromfile("8 Puzzle(3) - Case 1.txt");
             Node t = new Node(test.N, test.p);
-            a.solver(t);
+            Solvable.isSolvable(t);
+
+            AStar a = new AStar();
+
+            //a.solver(t);
             //if (queue.getMin() == null)
             //    Console.WriteLine("null");
             //else
