@@ -7,7 +7,10 @@ namespace NPuzzle
     class PriorityQueue
     {
         public List<Node> nodes = new List<Node>();
-        public  int size = -1;
+        public int size = -1;
+        public int minNum=1;
+
+
         private int getParentIndex(int indx)
         {
             if (indx < 0)
@@ -46,9 +49,10 @@ namespace NPuzzle
             if (size > -1)
             {
                 Node n = nodes[0];
-                nodes[0] = nodes[size];
+                //nodes[0] = nodes[size];
+                nodes.RemoveAt(0);
                 size = size - 1;
-                this.shiftElementsDown(0);
+                //this.shiftElementsDown(0);
                 return n;
             }
             throw new InvalidOperationException("Heap is empty");
@@ -88,7 +92,7 @@ namespace NPuzzle
         public void HeapInsert(Node n)
         {
             size = size + 1;
-            nodes[size] = n;
+            nodes.Add (n);
             this.shiftElementsUp(size);
         }
 
@@ -96,8 +100,24 @@ namespace NPuzzle
         {
             return nodes[0];
         }
-        
-  
+        public bool checkDublic()
+        {
+            bool dub = false;
+            
+            for(int i=1;i<size;i++)
+            {
+                if (nodes[0].heuristic_value == nodes[i].heuristic_value)
+                {
+                    minNum++;
+                    dub = true;
+                    Console.WriteLine("index");
+                    Console.WriteLine(i);
+                }
 
+                else
+                    break;
+            }
+            return dub;
+        }
     }
 }
