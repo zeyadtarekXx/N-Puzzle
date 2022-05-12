@@ -6,7 +6,7 @@ namespace NPuzzle
 {
     class PriorityQueue
     {
-        public  Node[] nodes = new Node[100];
+        public List<Node> nodes = new List<Node>();
         public  int size = -1;
         private int getParentIndex(int indx)
         {
