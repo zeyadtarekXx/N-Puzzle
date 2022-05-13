@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -36,7 +36,7 @@ namespace NPuzzle
 
         // This method merges two sorted arrays and returns inversion count in the arrays.
         // note: the two arrays(firt-mid : mid-last) are already sorted in this step
-        public static int merge(int[] arr, int[] temp, int left, int mid, int right)
+        static int merge(int[] arr, int[] temp, int left, int mid, int right)
         {
 
             int i, j, k;
@@ -46,35 +46,55 @@ namespace NPuzzle
             k = left; // k is index for temp array
 
             int inv_count = 0;
-            while ((i <= mid - 1) && (j <= right))
+            while ((i < mid) && (j <= right))
             {
-                if (arr[i] <= arr[j])
+
+                if (arr[i] > arr[j])
                 {
-                    temp[k++] = arr[i++];
+                    temp[k] = arr[j];
+                    //inversion count execluding the zero value
+                    if (arr[i] != 0 && arr[j] != 0)
+                    {
+                        inv_count = inv_count + (mid - i);
+                    }
+                    ++k;
+                    ++j;
+
                 }
                 else
                 {
-                    temp[k++] = arr[j++];
+                    temp[k] = arr[i];
+                    ++k;
+                    ++i;
 
-
-                    inv_count = inv_count + (mid - i);
                 }
             }
 
-            // Copy the remaining elements of left subarray to temp
+            //Copy the remaining elements of left subarray to temp
             while (i <= mid - 1)
-                temp[k++] = arr[i++];
-
+            {
+                temp[k] = arr[i];
+                ++k;
+                ++i;
+            }
             // Copy the remaining elements of right subarray to temp
 
             while (j <= right)
-                temp[k++] = arr[j++];
+            {
+                temp[k] = arr[j];
+                ++k;
+                ++j;
+            }
 
-            // Copy the merged elements to original array 
+            //Copy the merged elements to original array
             for (i = left; i <= right; i++)
+            {
                 arr[i] = temp[i];
+            }
+
 
             return inv_count;
+
         }
 
 
@@ -82,39 +102,34 @@ namespace NPuzzle
         {
             int[] arr = new int[node.perimeter * node.perimeter];
             Helpers.copypuzzle(arr, node.puzzle, node.perimeter * node.perimeter);
-            int num_of_inversions = Solvable.mergeSort(arr, node.perimeter * node.perimeter);
+            int num_of_inversions = mergeSort(arr, node.perimeter * node.perimeter);
 
             Console.Write("Number of inversions are " + num_of_inversions);
-
 
             if (node.perimeter % 2 == 0)
             {
                 int zeroRow = node.zeroIndx / node.perimeter;
-                if ((node.perimeter - zeroRow) % 2 == 0 && num_of_inversions % 2 != 0)
+                //zeroRow++;
+                if ((node.perimeter- zeroRow)% 2 == 0 && num_of_inversions % 2 != 0)
                 {
                     Console.Write("the puzzle is solvable");
                     return true;
-
                 }
-                else if ((node.perimeter - zeroRow) % 2 != 0 && num_of_inversions % 2 == 0)
+                else if ((node.perimeter  - zeroRow) % 2 != 0 && num_of_inversions % 2 == 0)
                 {
                     Console.Write("the puzzle is solvable");
                     return true;
-
                 }
-
             }
             if (node.perimeter % 2 != 0 && num_of_inversions % 2 == 0)
             {
                 Console.Write("the puzzle is solvable");
                 return true;
-
             }
             else
             {
                 Console.Write("the puzzle is un-solvable !!");
                 return false;
-
             }
         }
     }
