@@ -6,9 +6,10 @@ namespace NPuzzle
 {
     class PriorityQueue
     {
-        public List<Node> nodes = new List<Node>();
+        //public List<Node> nodes = new List<Node>();
+        public Node[] nodes = new Node[100000];
         public int size = -1;
-        public int minNum=1;
+        public int minNum = 1;
 
 
         private int getParentIndex(int indx)
@@ -43,7 +44,7 @@ namespace NPuzzle
             nodes[i] = nodes[j];
             nodes[j] = temp;
         }
-
+        
         public Node HeapExtractMin()
         {
             if (size > -1)
@@ -91,7 +92,9 @@ namespace NPuzzle
         public void HeapInsert(Node n)
         {
             size = size + 1;
-            nodes.Add (n);
+            //Console.WriteLine(size);
+            nodes[size] = n;
+            //nodes.Add(n);
             this.shiftElementsUp(size);
         }
 
@@ -102,8 +105,8 @@ namespace NPuzzle
         public bool checkDublic()
         {
             bool dub = false;
-            
-            for(int i=1;i<size;i++)
+
+            for (int i = 1; i < size; i++)
             {
                 if (nodes[0].heuristic_value == nodes[i].heuristic_value)
                 {
