@@ -49,10 +49,9 @@ namespace NPuzzle
             if (size > -1)
             {
                 Node n = nodes[0];
-                //nodes[0] = nodes[size];
-                nodes.RemoveAt(0);
+                nodes[0] = nodes[size];
                 size = size - 1;
-                //this.shiftElementsDown(0);
+                this.shiftElementsDown(0);
                 return n;
             }
             throw new InvalidOperationException("Heap is empty");
