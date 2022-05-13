@@ -47,7 +47,7 @@ namespace NPuzzle
 
             //a.solver(t);
             //if (queue.getMin() == null)
-            //    Console.WriteLine("null");
+               Console.WriteLine("null");
             //else
             //Console.WriteLine(queue.getMin().puzzleStr);
             int md = Helpers.ManhattanDistance(current);
