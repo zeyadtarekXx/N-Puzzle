@@ -37,17 +37,25 @@ namespace NPuzzle
             //queue.HeapInsert(node3);
 
             //queue.HeapInsert(node2);
+            //Hamming and Manhattan
+            //Readfromfile test = new Readfromfile("50 Puzzle.txt");
+            //Readfromfile test = new Readfromfile("9999 Puzzle.txt");
+            //Readfromfile test = new Readfromfile("99 Puzzle - 1.txt");
+            Readfromfile test = new Readfromfile("99 Puzzle - 2.txt");
 
 
-            Readfromfile test = new Readfromfile("8 Puzzle(3) - Case 1.txt");
+            //Readfromfile test = new Readfromfile("15 Puzzle - 1.txt");
+
+            //v.large test
+            //Readfromfile test = new Readfromfile("TEST.txt");
             Node t = new Node(test.N, test.p);
-            Solvable.isSolvable(t);
+            //Solvable.isSolvable(t);
 
             AStar a = new AStar();
 
-            //a.solver(t);
+            a.solver(t);
             //if (queue.getMin() == null)
-               Console.WriteLine("null");
+            //    Console.WriteLine("null");
             //else
             //Console.WriteLine(queue.getMin().puzzleStr);
             int md = Helpers.ManhattanDistance(current);
