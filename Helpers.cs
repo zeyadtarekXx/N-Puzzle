@@ -15,7 +15,8 @@ namespace NPuzzle
                 {
                     int x, y;
                     x = Math.DivRem(current[i] - 1, n, out y);
-                    md += Math.Abs(i / 3 - x) + Math.Abs(i % 3 - y);
+                    x = (int)Math.Floor(Convert.ToDouble(x));
+                    md += Math.Abs(i / n - x) + Math.Abs(i % n - y);
                 }
             }
             return md;
@@ -122,4 +123,3 @@ namespace NPuzzle
  
     }
 }
- 
