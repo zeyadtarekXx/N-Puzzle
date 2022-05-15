@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace NPuzzle
 {
@@ -117,6 +118,20 @@ namespace NPuzzle
                 x[i] = y[i];
             }
         }
- 
+        public static List<string> getStates(Node node, out int perimeter, out int movements)
+        {
+            List<string> list = new List<string>();
+            movements = node.g;
+            perimeter = node.perimeter;
+            list.Add(node.puzzleStr);
+            for (int i = 0; i < movements; i++)
+            {
+                node = node.parent;
+                list.Insert(0, node.puzzleStr);
+            }
+            return list;
+        }
+
+
     }
 }
