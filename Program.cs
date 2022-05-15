@@ -61,14 +61,8 @@ namespace NPuzzle
                  node=AStar.solver(t);
             }
             List<string> list = new List<string>();
-            int size = node.g;
-            Console.WriteLine("Num of movments {0}\n", size);
-            list.Add(node.puzzleStr);
-            for (int i=0;i<size;i++)
-            {
-                node = node.parent;
-                list.Insert(0, node.puzzleStr);
-            }
+            int size, n;
+            list=Helpers.getStates(node, out n, out size);
             for (int i = 0; i <= size; i++)
             {
                 Console.WriteLine(list[i]);
@@ -78,6 +72,8 @@ namespace NPuzzle
             stopwatch.Stop();
             Console.WriteLine("Elapsed Time is {0} ms", stopwatch.ElapsedMilliseconds);
             Console.WriteLine("Elapsed Time is {0} s", stopwatch.ElapsedMilliseconds/1000);
+          
+                
 
         }
     }
