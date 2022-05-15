@@ -1,5 +1,8 @@
 using System;
-
+using System.Diagnostics;
+using System.Threading;
+using System.Collections.Generic;
+using System.Text;
 
 namespace NPuzzle
 {
@@ -7,60 +10,74 @@ namespace NPuzzle
     {
         static void Main(string[] args)
         {
-            int[] current = new int[] {8,6,7,
-                                       2,5,4,
-                                       3,0,1};//md 21
-            int[] current0 = new int[]{ 0, 1, 2,
-                                        5, 6 ,3,
-                                        4, 7, 8};
+            Stopwatch stopwatch = new Stopwatch();
 
-            int[] current1 = new int[] {1,2,5,
-                                        3,0,6,
-                                        7,4,8};//md 8
-
-            int[] current3 = new int[] {0,1,3,
-                                        4,2,5,
-                                        7,8,6};//md 8
-            int[,] goal = new int [,] {    {1,2,3},
-                                             {4,5,6},
-                                             {7,8,0}
-                                    };
-            //Helpers help = new Helpers();
-            PriorityQueue queue = new PriorityQueue();
-            Node node = new Node(3, current0);
-            //node.set_F(2, 5);
-            Node node2 = new Node(3, current1);
-            //node2.set_F(2, 3);
-            Node node3 = new Node(3, current3);
-            //node2.set_F(1, 3);
-            //queue.HeapInsert(node);
-            //queue.HeapInsert(node3);
-
-            //queue.HeapInsert(node2);
+            stopwatch.Start();
+            //Complete
+            //Solvable
             //Hamming and Manhattan
             //Readfromfile test = new Readfromfile("50 Puzzle.txt");
             //Readfromfile test = new Readfromfile("9999 Puzzle.txt");
             //Readfromfile test = new Readfromfile("99 Puzzle - 1.txt");
-            Readfromfile test = new Readfromfile("99 Puzzle - 2.txt");
+            //Readfromfile test = new Readfromfile("99 Puzzle - 2.txt");
 
+            //Manhattan only
+            //Readfromfile test = new Readfromfile("15 Puzzle 1.txt");
+            //Readfromfile test = new Readfromfile("15 Puzzle 3.txt");
+            //Readfromfile test = new Readfromfile("15 Puzzle 4.txt");
+            //Readfromfile test = new Readfromfile("15 Puzzle 5.txt");
 
+            //Complete
+            //unsolvable
+            //Readfromfile test = new Readfromfile("15 Puzzle 1 - Unsolvable.txt");
+            //Readfromfile test = new Readfromfile("99 Puzzle - Unsolvable Case 1.txt");
+            //Readfromfile test = new Readfromfile("99 Puzzle - Unsolvable Case 2.txt");
+           // Readfromfile test = new Readfromfile("9999 Puzzle- Unsolvable.txt");
+
+            //Sample testing
+            //Solvable
+            //Readfromfile test = new Readfromfile("8 Puzzle (1).txt");
+            Readfromfile test = new Readfromfile("8 Puzzle (2).txt");
+            //Readfromfile test = new Readfromfile("8 Puzzle (3).txt");
             //Readfromfile test = new Readfromfile("15 Puzzle - 1.txt");
+            //Readfromfile test = new Readfromfile("24 Puzzle 1.txt");
+            //Readfromfile test = new Readfromfile("24 Puzzle 2.txt");
+            //Sample testing
+            //unSolvable
+            //Readfromfile test = new Readfromfile("8 Puzzle - Case 1.txt");
+            //Readfromfile test = new Readfromfile("8 Puzzle(2) - Case 1.txt");
+            //Readfromfile test = new Readfromfile("8 Puzzle(3) - Case 1.txt");
+            //Readfromfile test = new Readfromfile("15 Puzzle - Case 2.txt");
 
             //v.large test
             //Readfromfile test = new Readfromfile("TEST.txt");
+
+
             Node t = new Node(test.N, test.p);
-            //Solvable.isSolvable(t);
-
-            AStar a = new AStar();
-
-            a.solver(t);
-            //if (queue.getMin() == null)
-            //    Console.WriteLine("null");
-            //else
-            //Console.WriteLine(queue.getMin().puzzleStr);
-            int md = Helpers.ManhattanDistance(current);
-            //int hd = help.HammingDistance(current1);
-            //Console.WriteLine(md);
+            t.findZeroIndx();
+            Node node = new Node(); 
+            if(Solvable.isSolvable(t)) 
+            {
+                 node=AStar.solver(t);
+            }
+            List<string> list = new List<string>();
+            int size = node.g;
+            Console.WriteLine("Num of movments {0}\n", size);
+            list.Add(node.puzzleStr);
+            for (int i=0;i<size;i++)
+            {
+                node = node.parent;
+                list.Insert(0, node.puzzleStr);
+            }
+            for (int i = 0; i <= size; i++)
+            {
+                Console.WriteLine(list[i]);
+                Console.WriteLine("\n");
+            }
+            
+            stopwatch.Stop();
+            Console.WriteLine("Elapsed Time is {0} ms", stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("Elapsed Time is {0} s", stopwatch.ElapsedMilliseconds/1000);
 
         }
     }
