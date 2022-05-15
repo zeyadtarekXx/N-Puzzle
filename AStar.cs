@@ -7,10 +7,9 @@ namespace NPuzzle
 {
     class AStar
     {
-        private HashSet<string> hashset= new HashSet<string>();
-        private PriorityQueue pqueue =new PriorityQueue();
-        static int count = 0;
-        public void solver(Node parentnode)
+        private static HashSet<string> hashset= new HashSet<string>();//closed list
+        private static PriorityQueue pqueue =new PriorityQueue();//open list
+        public static Node solver(Node parentnode)
         {
             hashset.Add(new string(parentnode.puzzleStr));
             Node node=null;
@@ -19,29 +18,24 @@ namespace NPuzzle
                 if (node==null)
                 {
                     node = parentnode;
-                    //Console.WriteLine(node.puzzleStr);
                 }
                 else
                 {
                     node = pqueue.HeapExtractMin();
-                    Console.WriteLine("depth");
-                    Console.WriteLine(node.g);
-                    //Console.WriteLine(node.puzzleStr);
                 }
 
                 if (Helpers.goal(node.puzzle))
                 {
-                    break;
+                    return node;  
                 }
                 else
                 {
                     int zeroindx= node.zeroIndx;
                     PotentialNodes(zeroindx, node);
                 }
-                count++;
             }
         }
-        public void PotentialNodes(int indx, Node current)
+        private static void PotentialNodes(int indx, Node current)
         {
             int zeroRow= indx / current.perimeter;
             int zeroCol = indx % current.perimeter;
@@ -50,8 +44,11 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveRight(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                    newPuzzle.set_F(newPuzzle.g , Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    //newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                    if(true)
+                     newPuzzle.set_F(newPuzzle.g , Helpers.ManhattanDistance(newPuzzle.puzzle));
+                    else
+                      newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
                     hashset.Add(newPuzzle.puzzleStr);
@@ -65,8 +62,10 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveLeft(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                    newPuzzle.set_F(newPuzzle.g , Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    //newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                    if (true)
+                        newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
+                    else
+                        newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
                     hashset.Add(new string(newPuzzle.puzzleStr));
@@ -80,8 +79,10 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveDown(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                     newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    //newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                    if (true)
+                        newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
+                    else
+                        newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
                     hashset.Add(new string(newPuzzle.puzzleStr));
@@ -95,8 +96,10 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveUp(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                    newPuzzle.set_F(newPuzzle.g , Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    //newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                    if (true)
+                        newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
+                    else
+                        newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
                     hashset.Add(new string(newPuzzle.puzzleStr));
