@@ -24,7 +24,6 @@ namespace NPuzzle
             this.puzzle = puzzle;
             this.perimeter = p;
             puzzleToStr();
-            findZeroIndx();
         }
         public Node()
         {
@@ -59,9 +58,7 @@ namespace NPuzzle
             int size = this.perimeter * this.perimeter;
             for (int i = 1; i <= size; i++)
             {
-                this.puzzleStr += puzzle[i-1] + " ";
-                if (i%this.perimeter==0)
-                    this.puzzleStr += "\n";
+                this.puzzleStr += puzzle[i-1];
             }
         }
 
