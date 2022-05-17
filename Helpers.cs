@@ -5,133 +5,146 @@ namespace NPuzzle
 {
     class Helpers
     {
-        public static int ManhattanDistance(int[] current)
-        {
-            int n = (int)Math.Sqrt(current.Length);
-            int md = 0;
-            int size = n * n;
-            for (int i = 0; i < size; i++)
+            public static int ManhattanDistance(int[] current)
             {
-                if (current[i] != 0 && current[i] != i + 1)
+                int n = (int)Math.Sqrt(current.Length);
+                int md = 0;
+                int size = n * n;
+                for (int i = 0; i < size; i++)
                 {
-                    int x, y;
-                    x = Math.DivRem(current[i] - 1, n, out y);
-                    x = (int)Math.Floor(Convert.ToDouble(x));
-                    md += Math.Abs(i / n - x) + Math.Abs(i % n - y);
+                    if (current[i] != 0 && current[i] != i + 1)
+                    {
+                        int x, y;
+                        x = Math.DivRem(current[i] - 1, n, out y);
+                        x = (int)Math.Floor(Convert.ToDouble(x));
+                        md += Math.Abs(i / n - x) + Math.Abs(i % n - y);
+                    }
+                }
+                return md;
+            }
+
+            public static int HammingDistance(int[] current)
+            {
+                int size = current.Length;
+                int hd = 0;
+                for (int i = 0; i < size; i++)
+                {
+                    if (current[i] != 0 && current[i] != i + 1)
+                    {
+                        hd++;
+                    }
+                }
+                return hd;
+            }
+            public static Node moveRight(int indx, Node current)
+            {
+                int[] copy = new int[current.perimeter * current.perimeter];
+                copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
+
+                int temp = copy[indx + 1];
+                copy[indx + 1] = copy[indx];
+                copy[indx] = temp;
+
+                Node newPuzzle = new Node(current.perimeter, copy);
+                newPuzzle.zeroIndx = current.zeroIndx + 1;
+                newPuzzle.g = current.g + 1;
+
+                return newPuzzle;
+            }
+            public static Node moveLeft(int indx, Node current)
+            {
+
+                int[] copy = new int[current.perimeter * current.perimeter];
+                copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
+
+                int temp = copy[indx - 1];
+                copy[indx - 1] = copy[indx];
+                copy[indx] = temp;
+
+                Node newPuzzle = new Node(current.perimeter, copy);
+                newPuzzle.zeroIndx = current.zeroIndx - 1;
+                newPuzzle.g = current.g + 1;
+
+                return newPuzzle;
+            }
+            public static Node moveUp(int indx, Node current)
+            {
+                int[] copy = new int[current.perimeter * current.perimeter];
+                copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
+
+                int temp = copy[indx - current.perimeter];
+                copy[indx - current.perimeter] = copy[indx];
+                copy[indx] = temp;
+
+                Node newPuzzle = new Node(current.perimeter, copy);
+                newPuzzle.zeroIndx = current.zeroIndx - current.perimeter;
+                newPuzzle.g = current.g + 1;
+
+                return newPuzzle;
+
+            }
+            public static Node moveDown(int indx, Node current)
+            {
+                int[] copy = new int[current.perimeter * current.perimeter];
+                copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
+
+                int temp = copy[indx + current.perimeter];
+                copy[indx + current.perimeter] = copy[indx];
+                copy[indx] = temp;
+
+                Node newPuzzle = new Node(current.perimeter, copy);
+                newPuzzle.zeroIndx = current.zeroIndx + current.perimeter;
+                newPuzzle.g = current.g + 1;
+
+                return newPuzzle;
+            }
+
+            public static bool goal(int[] puzzle)
+            {
+                int size = puzzle.Length;
+                for (int i = 0; i < size - 1; i++)
+                {
+                    if (puzzle[i] != i + 1)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            public static void copypuzzle(int[] x, int[] y, int size)
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    x[i] = y[i];
                 }
             }
-            return md;
-        }
-
-        public static int HammingDistance(int[] current)
-        {
-            int size= current.Length;
-            int hd = 0;
-            for (int i = 0; i < size; i++)
+            public static List<string> getStates(Node node, out int perimeter, out int movements)
             {
-                if (current[i] != 0 && current[i] != i+1)
+                List<string> list = new List<string>();
+                movements = node.g;
+                perimeter = node.perimeter;
+                list.Add(node.puzzleStr);
+                for (int i = 0; i < movements; i++)
                 {
-                    hd++;
+                    node = node.parent;
+                    list.Insert(0, node.puzzleStr);
                 }
+                return list;
             }
-           return hd;
-        }
-        public static Node moveRight(int indx, Node current)
-        {
-            int[] copy = new int[current.perimeter * current.perimeter];
-            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
 
-            int temp = copy[indx + 1];
-            copy[indx + 1] = copy[indx];
-            copy[indx] = temp;
-
-            Node newPuzzle = new Node(current.perimeter, copy);
-            newPuzzle.zeroIndx =current.zeroIndx+ 1;
-            newPuzzle.g = current.g + 1;
-
-            return newPuzzle;
-        }
-        public static Node moveLeft(int indx, Node current)
-        {
-         
-            int[] copy = new int[current.perimeter * current.perimeter];
-            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
-
-            int temp = copy[indx - 1];
-            copy[indx - 1] = copy[indx];
-            copy[indx] = temp;
-
-            Node newPuzzle = new Node(current.perimeter, copy);
-            newPuzzle.zeroIndx = current.zeroIndx - 1;
-            newPuzzle.g = current.g + 1;
-
-            return newPuzzle;
-        }
-        public static Node moveUp(int indx, Node current)
-        {
-            int[] copy = new int[current.perimeter * current.perimeter];
-            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
-
-            int temp = copy[indx - current.perimeter];
-            copy[indx - current.perimeter] = copy[indx];
-            copy[indx] = temp;
-
-            Node newPuzzle = new Node(current.perimeter, copy);
-            newPuzzle.zeroIndx = current.zeroIndx - current.perimeter;
-            newPuzzle.g = current.g + 1;
-
-            return newPuzzle;
-
-        }
-        public static Node moveDown(int indx, Node current)
-        {
-            int[] copy = new int[current.perimeter * current.perimeter];
-            copypuzzle(copy, current.puzzle, current.perimeter * current.perimeter);
-
-            int temp = copy[indx + current.perimeter];
-            copy[indx + current.perimeter] = copy[indx];
-            copy[indx] = temp;
-
-            Node newPuzzle = new Node(current.perimeter, copy);
-            newPuzzle.zeroIndx = current.zeroIndx + current.perimeter;
-            newPuzzle.g = current.g + 1;
-
-            return newPuzzle;
-        }
-
-        public static bool goal(int [] puzzle)
-        {
-            int size = puzzle.Length;
-            for (int i = 0; i < size-1; i++)
+            public static List<int[]> getStates_puzz(Node node, out int perimeter, out int movements)
             {
-                if (puzzle[i] != i + 1)
+                List<int[]> list = new List<int[]>();
+                movements = node.g;
+                perimeter = node.perimeter;
+                list.Add(node.puzzle);
+                for (int i = 0; i < movements; i++)
                 {
-                    return false; 
+                    node = node.parent;
+                    list.Insert(0, node.puzzle);
                 }
+                return list;
             }
-            return true;
-        }
-        public static void copypuzzle(int[] x, int[] y, int size)
-        {
-            for (int i = 0; i < size; i++)
-            {
-                x[i] = y[i];
-            }
-        }
-        public static List<string> getStates(Node node, out int perimeter, out int movements)
-        {
-            List<string> list = new List<string>();
-            movements = node.g;
-            perimeter = node.perimeter;
-            list.Add(node.puzzleStr);
-            for (int i = 0; i < movements; i++)
-            {
-                node = node.parent;
-                list.Insert(0, node.puzzleStr);
-            }
-            return list;
         }
 
-
-    }
 }
