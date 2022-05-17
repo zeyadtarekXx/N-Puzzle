@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N-PUZZLE ALGO GUI", "N-PUZZLE ALGO GUI\N-PUZZLE ALGO GUI.csproj", "{223C2550-F85F-4240-878A-50C36C6B245F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{223C2550-F85F-4240-878A-50C36C6B245F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{223C2550-F85F-4240-878A-50C36C6B245F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{223C2550-F85F-4240-878A-50C36C6B245F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{223C2550-F85F-4240-878A-50C36C6B245F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B74B01BB-9E52-4E40-A5B0-7A0C786AF630}
+	EndGlobalSection
+EndGlobal
