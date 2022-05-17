@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,14 +7,17 @@ namespace ConsoleApp3
     class BFS
     {
         AStar A = new AStar();
-        public List<Node> breadthFirstSearch(Node root)
+        public List<int[]> steps = new List<int[]>();
+        public int counter = 0;
+
+        public void breadthFirstSearch(Node root)
         {
-            List<Node> steps = new List<Node>();
+           // List<Node> steps = new List<Node>();
             List<Node> white = new List<Node>();
             List<Node> black = new List<Node>();
             bool reached = false;
             white.Add(root);
-            int counter = 0;
+            
             while (white.Count > 0 && !reached)
             {
                 Node current = white[0];
@@ -29,16 +32,16 @@ namespace ConsoleApp3
 
                     if (Helpers.goal(child.puzzle))
                     {
-                        Console.WriteLine("first if");
+                        //Console.WriteLine("first if");
                         reached = true;
                         Node c = child;
 
-                        steps.Add(c);
+                        steps.Insert(0 , c.puzzle);
                         while (c.parent != null)
                         {
-                            Console.WriteLine("Found but getting steps");
+                            //Console.WriteLine("Found but getting steps");
                             c = c.parent;
-                            steps.Add(c);
+                            steps.Insert(0,c.puzzle);
                         }
                         break;
                     }
@@ -47,15 +50,15 @@ namespace ConsoleApp3
                     {
                         white.Add(child);
                         counter++;
-                        Console.WriteLine(counter);
+                        //Console.WriteLine(counter);
                         //Console.WriteLine(white.Count);
-                        Console.WriteLine(child.puzzleStr);
+                        //Console.WriteLine(child.puzzleStr);
                         // Console.WriteLine("Second if");
                     }
                 }
             }
 
-            return steps;
+            
         }
         private bool contains(List<Node> n, Node o)
         {
