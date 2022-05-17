@@ -35,7 +35,7 @@ namespace NPuzzle
                 }
             }
         }
-        private static void PotentialNodes(int indx, Node current)
+        public static void PotentialNodes(int indx, Node current)
         {
             int zeroRow= indx / current.perimeter;
             int zeroCol = indx % current.perimeter;
@@ -44,10 +44,10 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveRight(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                    if(true)
+                    //if(true)
                      newPuzzle.set_F(newPuzzle.g , Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    else
-                      newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                    //else
+                    // newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
 
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
@@ -62,13 +62,13 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveLeft(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                    if (true)
+                   // if (true)
                         newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    else
-                        newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                   // else
+                   //     newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
-                    hashset.Add(new string(newPuzzle.puzzleStr));
+                    hashset.Add(newPuzzle.puzzleStr);
                     current.childrenOfNode.Add(newPuzzle);
                     newPuzzle.parent = current;
                 }
@@ -79,13 +79,13 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveDown(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                    if (true)
-                        newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    else
-                        newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                   // if (true)
+                       newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
+                    //else
+                     //   newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
-                    hashset.Add(new string(newPuzzle.puzzleStr));
+                    hashset.Add(newPuzzle.puzzleStr);
                     current.childrenOfNode.Add(newPuzzle);
                     newPuzzle.parent = current;
                 }
@@ -96,13 +96,13 @@ namespace NPuzzle
                 Node newPuzzle = Helpers.moveUp(indx, current);
                 if (!hashset.Contains(newPuzzle.puzzleStr))
                 {
-                    if (true)
+                    //if (true)
                         newPuzzle.set_F(newPuzzle.g, Helpers.ManhattanDistance(newPuzzle.puzzle));
-                    else
-                        newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
+                    //else
+                     //   newPuzzle.set_F(newPuzzle.g, Helpers.HammingDistance(newPuzzle.puzzle));
                     newPuzzle.expansion_order = current.expansion_order + 1;
                     pqueue.HeapInsert(newPuzzle);
-                    hashset.Add(new string(newPuzzle.puzzleStr));
+                    hashset.Add(newPuzzle.puzzleStr);
                     current.childrenOfNode.Add(newPuzzle);
                     newPuzzle.parent = current;
                 }
