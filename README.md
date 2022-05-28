@@ -8,6 +8,8 @@ Only tiles that are horizontally or vertically adjacent to the blank space (not 
 
 We solved this problem by using Astar(A*) Algorithm and BFS Algorithm
 using Manhattan heuristic and Hamming Heuristic
+Priority Queue>>OPEN LIST
+Hashset>>CLOSED LIST
 
 before the Algorithm Starts we make sure that the puzzle is Solvable by checking number of inversions (using enhanced merge sort)
 
@@ -22,6 +24,3 @@ IMPLEMENTATION
 1.	Apply different shortest path algorithm (BFS) to search for the goal state. 
 2.	Simulation user friendly GUI which allows you to rewind the search one step (movement) at a time over a generic N-puzzle.
 
-
-	Priority Queue>>OPEN LIST
-  Hashset>>CLOSED LIST
