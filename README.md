@@ -8,7 +8,7 @@ Only tiles that are horizontally or vertically adjacent to the blank space (not 
 
 We solved this problem by using Astar(A*) Algorithm and BFS Algorithm
 using Manhattan heuristic and Hamming Heuristic
-Priority Queue>>OPEN LIST
+Priority Queue>>OPEN LIST //
 Hashset>>CLOSED LIST
 
 before the Algorithm Starts we make sure that the puzzle is Solvable by checking number of inversions (using enhanced merge sort)
