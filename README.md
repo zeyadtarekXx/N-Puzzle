@@ -24,3 +24,6 @@ IMPLEMENTATION
 1.	Apply different shortest path algorithm (BFS) to search for the goal state. 
 2.	Simulation user friendly GUI which allows you to rewind the search one step (movement) at a time over a generic N-puzzle.
 
+![2023-05-04 21_45_57-WhatsApp](https://user-images.githubusercontent.com/61972622/236299727-ce5da394-eb51-4072-8825-016affba85c1.png)
+![2023-05-04 21_45_35-WhatsApp](https://user-images.githubusercontent.com/61972622/236299740-d856f31a-35ea-4f10-97ea-0de870dc8b95.png)
+![2023-05-04 21_45_52-WhatsApp](https://user-images.githubusercontent.com/61972622/236299753-dbf28751-4246-4097-9442-f26661356005.png)
